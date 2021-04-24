@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -15,4 +16,17 @@ def item(request, title):
             "title": title,
             "item": util.get_entry(title)
         })
-    else: return HttpResponse("Not Found")
+    else: return HttpResponse("Not Found.......")
+
+def search(request):
+    q = request.GET["q"]
+    if(util.get_entry(q)):
+        return item(request,q)
+    else: 
+        s = r'.*'+q+r'.*'
+        all = '\n'.join(util.list_entries())
+        result = re.findall(s,all,re.I)
+        return render(request,"encyclopedia/search.html", {
+            "term": q,
+            "entries": result
+        })
