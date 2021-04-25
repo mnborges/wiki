@@ -1,7 +1,7 @@
 import re
 from django.shortcuts import render
-from django.http import HttpResponse
-
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from . import util
 
 
@@ -30,3 +30,12 @@ def search(request):
             "term": q,
             "entries": result
         })
+def newpage (request):
+    if request.method=="POST":
+        title = request.POST["title"]
+        content = request.POST["content"]
+        if util.get_entry(title): return HttpResponse("ERROR! PAGE ALREADY EXISTS")
+        else:
+            util.save_entry(title,content)
+            return item(request,title)
+    return render(request, "encyclopedia/newpage.html")
