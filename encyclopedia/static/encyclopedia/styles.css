@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    background-color: white;
 }
 
 code {
@@ -16,7 +15,6 @@ textarea {
     height: 90vh;
     width: 80%;
 }
-
 .main {
     padding: 10px;
 }

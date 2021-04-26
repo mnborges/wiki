@@ -1,13 +1,13 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    {{title}}
+    {{ title }}
 {% endblock %}
 
 {% block body %}
-	<div class="bb">
-		<h1>{{title}}</h1>
-
-		{{item}}
+	<div class="col-lg-10 col-md-9 p-4">
+		<div class="col-lg-2 col-sm-3 float-right"><a class="float-right" href="{% url 'edit' title%}">Edit Page</a></div>
+		<h1>{{ title }}</h1>
+		{{ item }}
 	</div>
 {% endblock %}

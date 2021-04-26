@@ -1,0 +1,37 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    New Page
+{% endblock %}
+
+{% block body %}
+		<div class="col-lg-6 col-md-7 p-4 ">
+			{% if page_url == "newpage" %}
+			<form action="{% url 'newpage' %}" method="POST" id="add">
+				<h3>New Page</h3>
+			{% elif page_url == "edit" %}
+			<form action="{% url 'edit' page_title %}" method="POST" id="add">
+				<h3>Edit</h3>
+			{% else %}
+			<form action="{% url 'index' %}" method="GET" id="add">
+			{% endif %}
+			{% csrf_token%}
+				<textarea id ="title" form="add" name= "title" placeholder="Enter page title" 
+					autofocus {% if page_url == "newpage" %} required {% elif page_url == "edit" %} 
+					disabled {% endif %}>{{ page_title }}</textarea>
+				<textarea id="content" form="add" name= "content" 
+					placeholder="Enter page heading and the term definition" 
+					required>{{ page_content }}</textarea>
+				<div class="float-right"><input type="submit"></div>
+				<div class="pt-2 pl-4">
+					<h4>Format hints</h4>
+					# Page Heading<br>
+					**bold text**<br>
+					*italic text*<br>
+					- unordered list item<br>
+					* unordered list item<br>
+					1. ordered list item<br>
+				</div>
+			</form>
+		</div>
+{% endblock %}

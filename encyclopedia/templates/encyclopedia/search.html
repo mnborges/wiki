@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block body %}
-	<div class= "bb">
-	<h1>Possible matches for {{ term }}: </h1>
-		<ul> 
-			{% for entry in entries %}
-						<li><a href="/{{entry}}">{{ entry }}</a></li>
-				
-				{% empty %}
-				<h3>Sorry.</h3>
-				<p>Your search did not match any entry. Please make sure that all words are spelled correctly.<br>
-				Additionally, you can <a href="{% url 'newpage' %}">create a new page</a>.</p>
-			{% endfor %}
-		</ul>
+	<div class="col-lg-10 col-md-9 p-4">
+		<h1>Possible matches for {{ term }}: </h1>
+			<ul> 
+				{% for entry in entries %}
+							<li><a href="/{{entry}}">{{ entry }}</a></li>
+					
+					{% empty %}
+					<h3>Sorry.</h3>
+					<p>Your search did not match any entry. Please make sure that all words are spelled correctly.<br>
+					Additionally, you can <a href="{% url 'newpage' %}">create a new page</a>.</p>
+				{% endfor %}
+			</ul>
 	</div>
 {% endblock %}
