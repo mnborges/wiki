@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.urls import reverse
 from . import util
+import markdown2
+
 
 #index page with list of all existing entries
 def index(request):
@@ -14,15 +16,15 @@ def index(request):
 #view for individual encyclopedia entries
 def item(request, title):
     if(util.get_entry(title)):
+        item = (util.get_entry(title))
         return render(request, "encyclopedia/item.html", {
             "title": title,
-            "item": util.get_entry(title)
+            "item": item
         })
-    else: 
-        """
-            ADD HERE A RENDER TO ANOTHER HTML PAGE WITH THE ERROR MESSAGE
-        """
-        return HttpResponse("Not Found.......")
+    else: #ERROR CODE_0 page does not exist
+        return render(request, "encyclopedia/error.html", {
+            "error_code": '0'
+        })
     
 #function to return search results
 def search(request):
@@ -43,10 +45,10 @@ def newpage (request):
         title = request.POST["title"] #user input for the title of the page
         content = request.POST["content"] #user input for the content of the page
         if util.get_entry(title): #checks if the title already exists in the wiki
-            return HttpResponse("ERROR! PAGE ALREADY EXISTS") 
-            """
-                ADD HERE A RENDER TO ANOTHER HTML PAGE WITH THE ERROR MESSAGE
-            """
+            return render(request, "encyclopedia/error.html", {
+                "existing_page": title,
+                "error_code": '1'
+            })
         else:
             util.save_entry(title,content)
             return item(request,title) #redirects user to the page created
@@ -58,7 +60,7 @@ def newpage (request):
 #view to edit an existing term in the wiki
 def edit(request, title):
     if request.method=="POST":
-        new_content = request.POST["content"].strip() #user input for the content of the page
+        new_content = request.POST["content"] #user input for the content of the page
         util.save_entry(title,new_content) 
         """
             ADD SOME SERVER-SIDE VALIDATION
@@ -71,10 +73,10 @@ def edit(request, title):
                 "page_content": util.get_entry(title),
                 "page_url": "edit"
             })
-        else: return HttpResponse("ERROR!....") 
-    """
-    else:
-        ADD HERE A REDIRECTION TO AN ERROR PAGE IF THE TITLE DOESNT MATCH AN EXISTING ENTRY
-    """
+        else: 
+            return render(request, "encyclopedia/error.html", {
+                "error_code": '2'
+            })
 def randpage(request):
     return item(request,random.choice(util.list_entries())) #returns random item from the entries' list
+    

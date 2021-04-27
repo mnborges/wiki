@@ -7,13 +7,11 @@
 {% block body %}
 		<div class="col-lg-6 col-md-7 p-4 ">
 			{% if page_url == "newpage" %}
-			<form action="{% url 'newpage' %}" method="POST" id="add">
+				<form action="{% url 'newpage' %}" method="POST" id="add">
 				<h3>New Page</h3>
 			{% elif page_url == "edit" %}
-			<form action="{% url 'edit' page_title %}" method="POST" id="add">
-				<h3>Edit</h3>
-			{% else %}
-			<form action="{% url 'index' %}" method="GET" id="add">
+				<form action="{% url 'edit' page_title %}" method="POST" id="add">
+				<h3>Edit Page</h3>
 			{% endif %}
 			{% csrf_token%}
 				<textarea id ="title" form="add" name= "title" placeholder="Enter page title" 
