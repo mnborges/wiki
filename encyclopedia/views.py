@@ -4,7 +4,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.urls import reverse
 from . import util
-import markdown2
 
 
 #index page with list of all existing entries

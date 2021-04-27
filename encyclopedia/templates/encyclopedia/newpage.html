@@ -7,10 +7,10 @@
 {% block body %}
 		<div class="col-lg-6 col-md-7 p-4 ">
 			{% if page_url == "newpage" %}
-				<form action="{% url 'newpage' %}" method="POST" id="add">
+				<form action="{% url 'wiki:newpage' %}" method="POST" id="add">
 				<h3>New Page</h3>
 			{% elif page_url == "edit" %}
-				<form action="{% url 'edit' page_title %}" method="POST" id="add">
+				<form action="{% url 'wiki:edit' page_title %}" method="POST" id="add">
 				<h3>Edit Page</h3>
 			{% endif %}
 			{% csrf_token%}

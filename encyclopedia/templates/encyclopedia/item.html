@@ -7,7 +7,7 @@
 
 {% block body %}
 	<div class="col-lg-10 col-md-9 p-4">
-		<div class="col-lg-2 col-sm-3 float-right"><a class="float-right" href="{% url 'edit' title%}">Edit Page</a></div>
+		<div class="col-lg-2 col-sm-3 float-right"><a class="float-right" href="{% url 'wiki:edit' title%}">Edit Page</a></div>
 		{{ item|markdown }}
 	</div>
 {% endblock %}

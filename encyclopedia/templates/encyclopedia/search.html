@@ -9,13 +9,13 @@
 		{% if entries  %}<h1>Possible matches for {{ term }}: </h1>
 			<ul> 
 				{% for entry in entries %}
-							<li><a href="/{{entry}}">{{ entry }}</a></li>
+							<li><a href=" {% url 'wiki:entry' entry %}">{{ entry }}</a></li>
 				{% endfor %}
 			</ul>
 		{% else %}
 			<h3>Sorry.</h3>
 			<p>Your search did not match any entry. Please make sure that all words are spelled correctly.<br>
-			Additionally, you can <a href="{% url 'newpage' %}">create a new page</a>.</p>
+			Additionally, you can <a href="{% url 'wiki:newpage' %}">create a new page</a>.</p>
 		{% endif %}	
 	</div> 
 {% endblock %}
