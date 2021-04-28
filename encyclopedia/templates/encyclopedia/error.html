@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block body %}
+	<div class="col-lg-10 col-md-9 p-4">
+		<h1>Something went wrong.</h1>
+		{% if error_code == '0' %}
+			This page does not exist.<br>
+			You can search for another entry or <a href ="{% url 'wiki:newpage' %}">add a new page.</a>
+		{% elif error_code == '1' %}
+			The page you tried to create already exists. Click<a href ="{% url 'wiki:item' existing_page %}"> here</a> to check it out.
+		{% elif error_code == '2' %}
+			The entry you tried to edit does not exist.<br>
+			You can search for another entry or <a href ="{% url 'wiki:newpage' %}">add a new page.</a>
+		{% else %}
+			Return to the <a href= "{% url 'wiki:index' %}">home page.</a>
+		{% endif %}
+	</div>
+{% endblock %}
